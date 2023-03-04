@@ -1,0 +1,5 @@
+[build]
+  command = "php -S 0.0.0.0:8000"
+  publish = "public"
+[[plugins]]
+  package = "@netlify/plugin-php"

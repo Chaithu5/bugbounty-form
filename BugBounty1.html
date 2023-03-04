@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Vulnerability Report</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="BugBounty.css">
+    <form action="submit.php" method="post">
+</head>
+<body>
+    <div class="container">
+        <img src="https://media.licdn.com/dms/image/C4E0BAQFMwxn7SECLkw/company-logo_200_200/0/1656665124633?e=1686182400&v=beta&t=Fu1v7Z7Wm0ctDJ_EbUKdwnPNHIYtFN2HcV4cv546oCc" alt="MiQ Logo">
+        <h1 class="font-weight-bold mt-4">Submit Vulnerability Report</h1>
+        <div class="card border-0">
+            <div class="card-body">
+                <p class="text-secondary">You're about to submit a report to MiQ. Provide as much information as possible about the potential issue you have discovered. The more information you provide, the quicker MiQ will be able to validate the issue.</p>
+            </div>
+        </div>
+        <form>
+            <div class="form-group border p-3">
+              <div class="mb-4"></div>
+              <h2 class="font-weight-bold fs-medium font-size-12" style="font-size: 28px;">1. Assets</h2>
+              <p class="text-secondary">Select the attack surface of this issue.</p>
+              <select class="form-control" id="assets" name="assets">
+                <option value="">Select</option>
+                <option value="ads.flipkart.com">ads.flipkart.com</option>
+                <option value="brands.flipkart.com">brands.flipkart.com</option>
+                <option value="miq.com">miq.com</option>
+              </select>
+              <small class="form-text text-muted">Currently selected: <span id="selected-assets"></span></small>
+            </div>
+               
+            <div class="form-group">
+                <div class="form-group border p-3">
+                <div class="mb-4"></div>
+                <h2 class="font-weight-bold fs-medium font-size-12" style="font-size: 28px;">2. Weakness</h2>
+                <p class="text-secondary">Select the type of the potential issue you have discovered. Can't pick just one? Select the best match or submit a separate report for each distinct weakness.</p>
+                <select class="form-control" id="weakness" name="weakness" size="6">
+                    <option value="CWE-113">HTTP Response Splitting (CWE-113)</option>
+                    <option value="CWE-918">Server-Side Request Forgery (SSRF) (CWE-918)</option>
+                    <option value="CWE-611">XML External Entities (XXE) (CWE-611)</option>
+                    <option value="CWE-307">Improper Restriction of Authentication Attempts (CWE-307)</option>
+                    <option value="CWE-120">Classic Buffer Overflow (CWE-120)</option>
+                    <option value="CWE-94">Code Injection (CWE-94)</option>
+                </select>
+                <small class="form-text text-muted">Currently selected: <span id="selected-weakness"></span></small>
+            </div>
+            <div class="form-group">
+                <div class="form-group border p-3">
+                <div class="mb-4"></div>
+                <h2 class="font-weight-bold fs-medium font-size-12" style="font-size: 28px;">3. Severity</h2>
+    <p class="text-secondary">Estimate the severity of the issue.</p>
+    <div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="severity" id="none" value="none">
+            <label class="form-check-label" for="none">None</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="severity" id="low" value="low">
+            <label class="form-check-label" for="low">Low</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="severity" id="medium" value="medium">
+            <label class="form-check-label" for="medium">Medium</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="severity" id="high" value="high">
+            <label class="form-check-label" for="high">High</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="severity" id="critical" value="critical">
+            <label class="form-check-label" for="critical">Critical</label>
+      </div>
+      <div class="form-group">
+      <div class="container mt-2">
+        <h2 class="font-weight-bold fs-medium font-size-12" style="font-size: 23px;">or CVSS v3.0 Calculator</h2>
+        <hr>
+        <h5>Attack Vector</h5>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="networkCheckbox" value="network">
+            <label class="form-check-label" for="networkCheckbox">Network</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="adjacentCheckbox" value="adjacent">
+            <label class="form-check-label" for="adjacentCheckbox">Adjacent</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="localCheckbox" value="local">
+            <label class="form-check-label" for="localCheckbox">Local</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="physicalCheckbox" value="physical">
+            <label class="form-check-label" for="physicalCheckbox">Physical</label>
+        </div>
+    
+        <h5 class="mt-3">Attack Complexity</h5>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="lowCheckbox" value="low">
+            <label class="form-check-label" for="lowCheckbox">Low</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="highCheckbox" value="high">
+            <label class="form-check-label" for="highCheckbox">High</label>
+        </div>
+    
+        <h5 class="mt-3">User Interaction</h5>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="noneCheckbox" value="none">
+            <label class="form-check-label" for="noneCheckbox">None</label>
+        </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="requiredCheckbox" value="required">
+        <label class="form-check-label" for="requiredCheckbox">Required</label>
+    </div>
+    <hr> <!-- add a horizontal line here -->
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="mb-4"></div>
+    <h2 class="font-weight-bold fs-medium font-size-12" style="font-size: 26px;">4. Proof of Concept</h2>
+
+        <p class="text-secondary">The proof of concept is the most important part of your report submission. Clear, reproducible steps will help us validate this issue as quickly as possible.</p>
+        <h5>Title*</h5>
+        <div class="form-group">
+            <input type="text" class="form-control" id="title" placeholder="Enter the title">
+        </div>
+        <h5>Description</h5>
+        <div class="form-group">
+            <textarea class="form-control" id="description" rows="5"></textarea>
+        </div>
+        <h5>Impact</h5>
+        <div class="form-group">
+            <textarea class="form-control" id="impact" rows="5"></textarea>
+        </div>
+        <div class="file-upload-container">
+            <div class="file-upload">
+              <p class="file-upload-text"></p>
+            </div>
+          </div>
+          <div class="container">
+            <div class="card p-3">
+              <div class="border border-dotted p-3 mb-3">
+                <p class="text-center mb-0">Drag and drop or select more files from the computer</p>
+                <div class="d-flex justify-content-center mt-3">
+                  <input type="file" id="file-input" style="display: none;">
+                  <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">Upload</button>
+                </div>          
+      </div>
+      <div class="form-group">
+        <label for="email"><h2>Email</h2></label>
+        <p>Enter your email to receive updates on the status of your submission. If you want to stay anonymous you can leave this field blank.</p>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+      </div>
+            <div class="mb-4"></div>
+            <div class="form-group">
+                <h2 class="font-weight-bold fs-medium font-size-12" style="font-size: 26px;"> Discovery Details</h2>
+                <p>Additional information about the discovery of the vulnerability you're reporting.</p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="time-spent">Time spent:</label>
+                      <div class="input-group">
+                        <input type="number" id="time-spent" name="time-spent" class="form-control" min="0" max="24">
+                        <div class="input-group-append">
+                          <span class="input-group-text">hours</span>
+                        </div>
+                      </div>
+                      <small class="form-text text-muted">Help us understand how long it took you to find this vulnerability.</small>
+                    </div>
+      </section>
+    </div>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <h2 style="text-align: center;" class="font-weight-bold fs-medium font-size-12" style="font-size: 26px;">Submit your report</h2>
+        <p style="color: grey; text-align: center;">By clicking 'Submit Report', you agree to MiQ's Terms and Conditions and acknowledge that you have read Privacy Policy and Disclosure Guidelines</p>
+        <form style="display: flex; flex-direction: column; align-items: center;">
+          <!-- form fields here -->
+          <button type="submit" class="btn btn-primary">Submit </button>
+        </form>
+      </div>
+      
+  </section>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#assets').change(function() {
+                $('#selected-assets').text($(this).val());
+            });
+            $('#weakness').change(function() {
+                $('#selected-weakness').text($(this).val());
+            });
+        });
+    </script>
+</body>
+</html>

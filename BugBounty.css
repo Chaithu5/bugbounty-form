@@ -1,0 +1,12 @@
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 90px;
+    margin-right: 20px;
+}
+
+h1 {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0;
+}
